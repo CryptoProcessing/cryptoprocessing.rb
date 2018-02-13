@@ -109,6 +109,9 @@ module Cryptoprocessing
                               })
     end
 
+    #
+    #
+    #
     def get_new_address(label)
       address = @client.create_address('some', {name: label})
       {account_uid: account.id, address: address}
@@ -127,6 +130,9 @@ module Cryptoprocessing
       list_transactions
     end
 
+    #
+    #
+    #
     def get_balance_for_address(account_uid, address_uid, state, from_timestamp = nil, to_timestamp = nil, currency = DEFAULT_BLOCKCHAIN_TYPE)
       balance = BigDecimal.new('0')
 
@@ -150,6 +156,9 @@ module Cryptoprocessing
       balance.to_d
     end
 
+    #
+    #
+    #
     def get_balance_for_address_in_usd(account_uid, address_uid, state, from_timestamp = nil, to_timestamp = nil)
       get_balance_for_address(account_uid, address_uid, state, from_timestamp, to_timestamp, 'usd')
     end
@@ -205,6 +214,9 @@ module Cryptoprocessing
     end
 
 
+    #
+    #
+    #
     def send_bitcoin(recipient_address, amount_btc, fee)
       params = {
           from_: ['some'],
@@ -214,6 +226,9 @@ module Cryptoprocessing
       @client.create_transaction('some', params)
     end
 
+    #
+    #
+    #
     def get_transaction_info(transaction_id)
       @client.address_transactions('some', transaction_id)
     end

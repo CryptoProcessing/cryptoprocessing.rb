@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
-require "cryptoprocessing/api/client"
+require 'cryptoprocessing/api/cli'
+
+Cryptoprocessing::CLI.start(ARGV)

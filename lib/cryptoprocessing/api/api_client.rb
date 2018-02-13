@@ -1,3 +1,6 @@
+require 'uri'
+require 'net/http'
+require 'json/ext'
 require 'cryptoprocessing/api/models/account'
 require 'cryptoprocessing/api/models/address'
 require 'cryptoprocessing/api/models/transaction'
@@ -53,9 +56,6 @@ module Cryptoprocessing
       {:Authorization => "Bearer #{@access_token}"}
     end
 
-    #
-    # HTTP
-    #
 
     #
     # HTTP GET method
@@ -118,9 +118,6 @@ module Cryptoprocessing
       end
     end
 
-    #
-    # Auth
-    #
 
     #
     # register
@@ -154,9 +151,6 @@ module Cryptoprocessing
       out
     end
 
-    #
-    # Transactions
-    #
 
     #
     # List Transactions
@@ -228,9 +222,6 @@ module Cryptoprocessing
       out
     end
 
-    #
-    # Accounts
-    #
 
     #
     # Get account info
@@ -260,9 +251,6 @@ module Cryptoprocessing
       out
     end
 
-    #
-    # Addresses
-    #
 
     #
     # List addresses
@@ -292,7 +280,7 @@ module Cryptoprocessing
     end
 
     #
-    # add address
+    # Add address
     #
     def create_address(account_id, params = {})
       out = nil
