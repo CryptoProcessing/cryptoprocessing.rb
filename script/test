@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "===> Bundling..."
+script/bootstrap --quiet
+
+for testvar in LOGIN PASSWORD TOKEN CLIENT_ID CLIENT_SECRET
+do
+  cryproprocessingvar="CRYPROPROCESSING_TEST_${testvar}"
+  if [[ -z "${!cryproprocessingvar}" ]]; then
+      echo "Please export ${cryproprocessingvar}";
+  fi
+done
+
+echo "===> Running specs..."
+(unset CRYPROPROCESSING_LOGIN; unset CRYPROPROCESSING_ACCESS_TOKEN; bundle exec rake spec)

@@ -1,8 +1,8 @@
-# Cryptoprocessing::Api::Client
+# Cryptoprocessing
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cryptoprocessing/client`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ruby Gem to access and interact with Cryptoprocessing API.
 
-TODO: Delete this and the text above, and describe your gem
+To experiment with that code, run `bin/console` for an interactive prompt.
 
 ## Installation
 
@@ -16,7 +16,7 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
+Or install it manually as:
 
     $ gem install cryptoprocessing
 
@@ -26,14 +26,14 @@ Or install it yourself as:
 require 'cryptoprocessing'
 
 # Authenticate using email and password
-client = Cryptoprocessing::Client.new(:email => 'example@mail.com', :password => 'PASSWORD')
+client = Cryptoprocessing::Client.new(:email => '<EMAIL>', :password => 'PASSWORD')
 
 # or
 
 # Using block
 Cryptoprocessing.configure do |c|
-  c.email = 'example@mail.com'
-  c.password = 'PASSWORD'
+  c.email = '<EMAIL>'
+  c.password = '<PASSWORD>'
 end
 
 # or
@@ -51,7 +51,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/cryptoprocessing-api-client. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/oomag/cryptoprocessing-api-client. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -59,4 +59,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Cryptoprocessing::Api::Client project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/cryptoprocessing-api-client/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Cryptoprocessing project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/oomag/cryptoprocessing-api-client/blob/master/CODE_OF_CONDUCT.md).
