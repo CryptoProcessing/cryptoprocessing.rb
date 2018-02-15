@@ -1,0 +1,10 @@
+--hide-void-return
+--no-private
+--markup=markdown
+--markup-provider=redcarpet
+--verbose
+lib/**/*.rb
+-
+README.md
+CODE_OF_CONDUCT.md
+LICENSE.txt

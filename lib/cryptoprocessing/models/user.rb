@@ -1,4 +1,4 @@
-require 'cryptoprocessing/api/models/api_object'
+require 'cryptoprocessing/models/api_object'
 
 module Cryptoprocessing
   class User < APIObject

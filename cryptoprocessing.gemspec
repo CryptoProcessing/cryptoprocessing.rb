@@ -1,17 +1,20 @@
+# -*- ruby -*-
+# encoding: utf-8
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'cryptoprocessing/api/client/version'
+require 'cryptoprocessing/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'cryptoprocessing-api-client'
-  spec.version       = Cryptoprocessing::Api::Client::VERSION
-  spec.authors       = ['Arthur Chafonov']
-  spec.email         = ['actuosus@gmail.com']
+  spec.name = 'cryptoprocessing'
+  spec.version = Cryptoprocessing::VERSION
+  spec.authors = ['Arthur Chafonov']
+  spec.email = ['actuosus@gmail.com']
 
-  spec.summary       = %q{Client for accessing Cryptoprocessing API}
-  spec.description   = %q{Gem to access Cryptoprocessing API}
-  spec.homepage      = 'https://github.com/oomag/cryptoprocessing-api-client'''
-  spec.license       = 'MIT'
+  spec.summary = %q{Client for accessing Cryptoprocessing API}
+  spec.description = %q{Gem to access Blockchain Processing Platform API}
+  spec.homepage = 'https://github.com/oomag/cryptoprocessing-api-client' ''
+  spec.license = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -22,13 +25,15 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+  spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
-  spec.bindir        = 'exe'
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.bindir = 'exe'
+  spec.executables = spec.files.grep(%r{^exe/}) {|f| File.basename(f)}
   spec.require_paths = ['lib']
+  spec.platform = Gem::Platform::RUBY
 
+  spec.add_dependency 'logging', '~> 2.0'
   spec.add_dependency 'thor', '~> 0.20'
 
   spec.add_development_dependency 'bundler', '~> 1.16'
