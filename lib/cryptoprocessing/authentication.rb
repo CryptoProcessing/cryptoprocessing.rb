@@ -9,8 +9,8 @@ module Cryptoprocessing
     # Indicates if the client was supplied a bearer token
     #
     # @return [Boolean]
-    def bearer_authenticated?
-      !!@bearer_token
+    def token_authenticated?
+      !!@access_token
     end
 
     def login_from_netrc
@@ -22,22 +22,26 @@ module Cryptoprocessing
       creds = info[netrc_host]
       if creds.nil?
         # creds will be nil if there is no netrc for this end point
-        octokit_warn "Error loading credentials from netrc file for #{api_endpoint}"
+        puts "Error loading credentials from netrc file for #{api_endpoint}"
       else
         creds = creds.to_a
         self.login = creds.shift
         self.password = creds.shift
       end
     rescue LoadError
-      octokit_warn "Please install netrc gem for .netrc support"
+      puts "Please install netrc gem for .netrc support"
     end
 
     def login(options)
-      post '/auth/login', options
+      post('/auth/login', options) do |resp|
+        @access_token = resp.body['auth_token']
+      end
     end
 
     def register(options)
-      post '/auth/register', options
+      post('/auth/register', options) do |resp|
+        @access_token = resp.body['auth_token']
+      end
     end
   end
 end

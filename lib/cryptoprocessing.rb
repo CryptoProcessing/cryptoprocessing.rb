@@ -1,6 +1,9 @@
+# encoding: utf-8
+# frozen_string_literal: true
 require 'cryptoprocessing/client'
 require 'cryptoprocessing/default'
 
+# Ruby module for to access Cryptoprocessing API
 module Cryptoprocessing
   class << self
     include Cryptoprocessing::Configurable
@@ -30,3 +33,5 @@ module Cryptoprocessing
 end
 
 Cryptoprocessing.setup
+
+require 'cryptoprocessing/rails' if defined?(::Rails::Engine)

@@ -3,7 +3,7 @@ module Cryptoprocessing
     # @see https://api.cryptoprocessing.io/#c42e8a72-9e11-c074-22ef-4fc9a70a1a8f
     module Transactions
       TRANSACTION_SEND_TYPE = 'send'
-      TRANSACTION_SEND_TYPE_RAW = 'raw'
+      TRANSACTION_SEND_TYPE_RAW = 'sendraw'
 
       TRANSACTION_FEE_FASTEST = 'fastestFee'
       TRANSACTION_FEE_HALF_HOUR = 'halfHourFee'
@@ -34,9 +34,10 @@ module Cryptoprocessing
       # Отсылаем в блокчейн сырую подписанную транзакцию
       #
       # @see https://api.cryptoprocessing.io/#655161a4-f6ff-6764-1667-8fb039912546
-      def send_raw_transaction(options = {})
+      def send_raw_transaction(raw_transaction_id, options = {})
         currency = if options[:currency] then options[:currency] else blockchain_type end
         options[:type] = TRANSACTION_SEND_TYPE_RAW
+        options[:raw_transaction_id] = raw_transaction_id
         post "/v1/#{currency}/sendrawtx", options
       end
 
@@ -45,10 +46,14 @@ module Cryptoprocessing
       # Создаем транзакцию
       #
       # @see https://api.cryptoprocessing.io/#8dd94a75-4b09-588e-c9ad-c9cb5f165d72
-      def create_transaction(options = {})
+      def create_transaction(account_id, options = {})
         currency = if options[:currency] then options[:currency] else blockchain_type end
         options[:type] = TRANSACTION_SEND_TYPE
         options[:fee] = TRANSACTION_FEE_FASTEST
+        options[:from_] = options[:from]
+        options[:to_] = options[:to]
+        options.delete(:from)
+        options.delete(:to)
         post "/v1/#{currency}/accounts/#{account_id}/transactions", options
       end
     end

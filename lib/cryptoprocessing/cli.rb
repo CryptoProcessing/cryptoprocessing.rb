@@ -1,4 +1,4 @@
-require 'cryptoprocessing/cryptoprocessing'
+require 'cryptoprocessing'
 require 'thor'
 require 'json/ext'
 
@@ -136,17 +136,25 @@ module Cryptoprocessing
 
     def send_raw_transaction(raw_transaction_id, description = nil)
       output = []
-      response = @client.send_raw_transaction({:raw_transactions_id => raw_transaction_id, :description => description})
+      response = @client.send_raw_transaction({
+                                                  :raw_transactions_id => raw_transaction_id,
+                                                  :description => description
+                                              })
       output << response['message']
       output = output.join("\n")
       puts output
     end
 
-    desc "create_transaction NAME", "say hello to NAME"
+    desc "create_transaction ACCOUNT_ID FROM TO AMOUNT DESCRIPTION IDEM", "Create transaction record"
 
-    def create_transaction(from_address, to_address)
+    def create_transaction(account_id, from_address, to_address, amount, description = nil, idem = nil)
       output = []
-      response = @client.create_transaction({:email => email, :password => password})
+      response = @client.create_transaction(account_id, {
+          :from => [from_address],
+          :to => [{:amount => amount, :address => to_address}],
+          :description => description,
+          :idem => idem
+      })
       output << response['message']
       output = output.join("\n")
       puts output

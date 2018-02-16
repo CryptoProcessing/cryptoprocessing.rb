@@ -7,13 +7,13 @@ require 'cryptoprocessing/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'cryptoprocessing'
-  spec.version = Cryptoprocessing::VERSION
+  spec.version = Cryptoprocessing::VERSION.dup
   spec.authors = ['Arthur Chafonov']
   spec.email = ['actuosus@gmail.com']
 
   spec.summary = %q{Client for accessing Cryptoprocessing API}
   spec.description = %q{Gem to access Blockchain Processing Platform API}
-  spec.homepage = 'https://github.com/oomag/cryptoprocessing-api-client' ''
+  spec.homepage = 'https://github.com/oomag/cryptoprocessing-api-client'
   spec.license = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.platform = Gem::Platform::RUBY
 
   spec.add_dependency 'logging', '~> 2.0'
-  spec.add_dependency 'thor', '~> 0.20'
+  spec.add_dependency 'thor', '~> 0.19'
 
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'rake', '~> 10.0'

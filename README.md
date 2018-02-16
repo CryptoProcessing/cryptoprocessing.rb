@@ -26,7 +26,7 @@ Or install it manually as:
 require 'cryptoprocessing'
 
 # Authenticate using email and password
-client = Cryptoprocessing::Client.new(:email => '<EMAIL>', :password => 'PASSWORD')
+client = Cryptoprocessing::Client.new(:email => '<EMAIL>', :password => '<PASSWORD>')
 
 # or
 
