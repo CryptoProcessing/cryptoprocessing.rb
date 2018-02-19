@@ -3,6 +3,8 @@ require 'cryptoprocessing/configurable'
 require 'cryptoprocessing/connection'
 require 'cryptoprocessing/client/accounts'
 require 'cryptoprocessing/client/addresses'
+require 'cryptoprocessing/client/callbacks'
+require 'cryptoprocessing/client/trackers'
 require 'cryptoprocessing/client/transactions'
 require 'cryptoprocessing/client/coinbase_wallet'
 
@@ -15,7 +17,9 @@ module Cryptoprocessing
     include Cryptoprocessing::Configurable
     include Cryptoprocessing::Connection
     include Cryptoprocessing::Client::Accounts
+    include Cryptoprocessing::Client::Callbacks
     include Cryptoprocessing::Client::Addresses
+    include Cryptoprocessing::Client::Trackers
     include Cryptoprocessing::Client::Transactions
 
     include Cryptoprocessing::Client::CoinbaseWallet

@@ -43,8 +43,11 @@ RSpec.describe Cryptoprocessing::Client do
 
   it 'should be able to create account' do
     stub_request(:post, "#{api_endpoint}#{api_namespace}/v1/accounts")
-        .with(body: {currency: blockchain_type, name: 'My Test Wallet'})
-        .to_return(body: {
+        .with(
+            headers: {:Authorization => "Bearer #{access_token}", 'Content-Type' => 'application/json'},
+            body: {currency: blockchain_type, name: 'My Test Wallet'}
+        )
+        .to_return(:status => 200, body: {
             "account_id": "da96b0e9-2b15-4147-b7fd-c3351ebb00b3",
             "name": "My Test Wallet",
             "status": "success"
@@ -54,7 +57,8 @@ RSpec.describe Cryptoprocessing::Client do
 
   it 'should be able to get account info' do
     stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}")
-        .to_return(body: {
+        .with(headers: {:Authorization => "Bearer #{access_token}"})
+        .to_return(:status => 200, body: {
             "data": {
                 "balance": {
                     "amount": 0,
@@ -76,10 +80,11 @@ RSpec.describe Cryptoprocessing::Client do
 
   it 'should be able to create address' do
     stub_request(:post, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/addresses")
-        .with(body: {
-            "name": "good address"
-        }.to_json)
-        .to_return(body: {
+        .with(
+            headers: {:Authorization => "Bearer #{access_token}", 'Content-Type' => 'application/json'},
+            body: {"name": "good address"}.to_json
+        )
+        .to_return(:status => 200, body: {
             "address": "mzGjb7kn5ZHFHxe3HsZzpyutmQDngYj7J8",
             "id": "68aefc07-b40f-4203-8a69-a3e471773f8e",
             "name": "good address",
@@ -89,60 +94,70 @@ RSpec.describe Cryptoprocessing::Client do
   end
 
   it 'should be able to get list of addresses' do
-    stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/addresses").to_return(body: {
-        "addresses": [
-            {
-                "address": "mzGjb7kn5ZHFHxe3HsZzpyutmQDngYj7J8",
-                "final_balance": 0,
-                "id": "68aefc07-b40f-4203-8a69-a3e471773f8e",
-                "n_tx": 0,
-                "name": "good address",
-                "total_received": 0,
-                "total_sent": 0,
-                "txs": []
-            }
-        ],
-        "status": "success"
-    }.to_json)
+    stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/addresses")
+        .with(headers: {:Authorization => "Bearer #{access_token}"})
+        .to_return(:status => 200, body: {
+            "addresses": [
+                {
+                    "address": "mzGjb7kn5ZHFHxe3HsZzpyutmQDngYj7J8",
+                    "final_balance": 0,
+                    "id": "68aefc07-b40f-4203-8a69-a3e471773f8e",
+                    "n_tx": 0,
+                    "name": "good address",
+                    "total_received": 0,
+                    "total_sent": 0,
+                    "txs": []
+                }
+            ],
+            "status": "success"
+        }.to_json)
     expect {client.addresses(account_id)}.to_not raise_error
   end
 
   it 'should be able to get address info' do
-    stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/addresses/#{address}").to_return(body: {
-        "address": "mzGjb7kn5ZHFHxe3HsZzpyutmQDngYj7J8",
-        "final_balance": 0,
-        "id": "68aefc07-b40f-4203-8a69-a3e471773f8e",
-        "n_tx": 0,
-        "name": "good address",
-        "status": "success",
-        "total_received": 0,
-        "total_sent": 0,
-        "txs": []
-    }.to_json)
+    stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/addresses/#{address}")
+        .with(headers: {:Authorization => "Bearer #{access_token}"})
+        .to_return(:status => 200, body: {
+            "address": "mzGjb7kn5ZHFHxe3HsZzpyutmQDngYj7J8",
+            "final_balance": 0,
+            "id": "68aefc07-b40f-4203-8a69-a3e471773f8e",
+            "n_tx": 0,
+            "name": "good address",
+            "status": "success",
+            "total_received": 0,
+            "total_sent": 0,
+            "txs": []
+        }.to_json)
     expect {client.address(account_id, address)}.to_not raise_error
   end
 
   it 'should be able to get list of transactions' do
-    stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/transactions").to_return(body: {
-        "status": "success",
-        "transactions": []
-    }.to_json)
+    stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/transactions")
+        .with(headers: {:Authorization => "Bearer #{access_token}"})
+        .to_return(:status => 200, body: {
+            "status": "success",
+            "transactions": []
+        }.to_json)
     expect {client.transactions(account_id)}.to_not raise_error
   end
 
   it 'should be able to get list of transactions by address' do
-    stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/transactions/address/#{address}").to_return(body: [].to_json)
+    stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/transactions/address/#{address}")
+        .with(headers: {:Authorization => "Bearer #{access_token}"})
+        .to_return(:status => 200, body: [].to_json)
     expect {client.transactions_by_address(account_id, address)}.to_not raise_error
   end
 
   it 'should be able to send raw transaction' do
     stub_request(:post, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/sendrawtx")
-        .with(body: {
-            "type": "sendraw",
-            "raw_transaction_id": "01000000011da9283b4ddf8d89eb996988b89ead56cecdc44041ab38bf787f1206cd90b51e000000006a47304402200ebea9f630f3ee35fa467ffc234592c79538ecd6eb1c9199eb23c4a16a0485a20220172ecaf6975902584987d295b8dddf8f46ec32ca19122510e22405ba52d1f13201210256d16d76a49e6c8e2edc1c265d600ec1a64a45153d45c29a2fd0228c24c3a524ffffffff01405dc600000000001976a9140dfc8bafc8419853b34d5e072ad37d1a5159f58488ac00000000",
-            "description": "подписанная транзакция"
-        })
-        .to_return(body: {
+        .with(
+            headers: {:Authorization => "Bearer #{access_token}", 'Content-Type' => 'application/json'},
+            body: {
+                "type": "sendraw",
+                "raw_transaction_id": "01000000011da9283b4ddf8d89eb996988b89ead56cecdc44041ab38bf787f1206cd90b51e000000006a47304402200ebea9f630f3ee35fa467ffc234592c79538ecd6eb1c9199eb23c4a16a0485a20220172ecaf6975902584987d295b8dddf8f46ec32ca19122510e22405ba52d1f13201210256d16d76a49e6c8e2edc1c265d600ec1a64a45153d45c29a2fd0228c24c3a524ffffffff01405dc600000000001976a9140dfc8bafc8419853b34d5e072ad37d1a5159f58488ac00000000",
+                "description": "подписанная транзакция"
+            })
+        .to_return(:status => 200, body: {
             "status": "success",
             "transaction": "402cc503487d6a26ffb4185ada70cce28d960060ec33dd519615df96eaabadea"
         }.to_json)
@@ -153,22 +168,24 @@ RSpec.describe Cryptoprocessing::Client do
 
   it 'should be able to create transaction' do
     stub_request(:post, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/transactions")
-        .with(body: {
-            "from_": [
-                address
-            ],
-            "fee": "fastestFee",
-            "description": "First",
-            "type": "send",
-            "to_": [
-                {
-                    "amount": "100",
-                    "address": "mv4rnyY3Su5gjcDNzbMLKBQkBicCtHUtFB"
-                }
-            ],
-            "idem": "12df1s2d12q121ge5rg4e4g81v"
-        })
-        .to_return(body: {
+        .with(
+            headers: {:Authorization => "Bearer #{access_token}", 'Content-Type' => 'application/json'},
+            body: {
+                "from_": [
+                    address
+                ],
+                "fee": "fastestFee",
+                "description": "First",
+                "type": "send",
+                "to_": [
+                    {
+                        "amount": "100",
+                        "address": "mv4rnyY3Su5gjcDNzbMLKBQkBicCtHUtFB"
+                    }
+                ],
+                "idem": "12df1s2d12q121ge5rg4e4g81v"
+            })
+        .to_return(:status => 200, body: {
             "status": "success",
             "transaction": "402cc503487d6a26ffb4185ada70cce28d960060ec33dd519615df96eaabadea"
         }.to_json)
@@ -178,5 +195,61 @@ RSpec.describe Cryptoprocessing::Client do
         :description => "First",
         :idem => "12df1s2d12q121ge5rg4e4g81v"
     })}.to_not raise_error
+  end
+
+  it 'should be able to get list of callbacks' do
+    stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/callback")
+        .with(headers: {:Authorization => "Bearer #{access_token}"})
+        .to_return(:status => 200, body: {
+            "addresses": [],
+            "status": "success"
+        }.to_json)
+    expect {client.callbacks(account_id)}.to_not raise_error
+  end
+
+  it 'should be able to create callback' do
+    stub_request(:post, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/callback")
+        .with(
+            headers: {:Authorization => "Bearer #{access_token}", 'Content-Type' => 'application/json'},
+            body: {
+                "address": "http://url.com"
+            }.to_json)
+        .to_return(:status => 200, body: {
+            "address": "http://url.com", # TODO Is it right?
+            "status": "success"
+        }.to_json)
+    expect {client.create_callback(account_id, "http://url.com")}.to_not raise_error
+  end
+
+  it 'should be able to get list of trackers' do
+    stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/tracing/address")
+        .with(headers: {:Authorization => "Bearer #{access_token}"})
+        .to_return(:status => 200,
+                   headers: {'Content-Type' => 'application/json'},
+                   body: {
+                       "addresses": [
+                           "3KXcjozWc2rE3TWi9bzPaJMbAA27ayTsbH"
+                       ],
+                       "status": "success"
+                   }.to_json)
+    expect {client.trackers(account_id)}.to_not raise_error
+  end
+
+  it 'should be able to create callback' do
+    stub_request(:post, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/tracing/address")
+        .with(
+            headers: {:Authorization => "Bearer #{access_token}", 'Content-Type' => 'application/json'},
+            body: {
+                "description": "First tracing address",
+                "address": address
+            }.to_json)
+        .to_return(
+            :status => 200,
+            headers: {'Content-Type' => 'application/json'},
+            body: {
+                "id": 1,
+                "status": "success"
+            }.to_json)
+    expect {client.create_tracker(account_id, address, {:description => "First tracing address"})}.to_not raise_error
   end
 end

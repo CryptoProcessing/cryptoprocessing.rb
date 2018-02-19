@@ -1,6 +1,6 @@
 # Cryptoprocessing
 
-Ruby Gem to access and interact with Cryptoprocessing API.
+Ruby Gem to access and interact with [Cryptoprocessing API](https://api.cryptoprocessing.io).
 
 To experiment with that code, run `bin/console` for an interactive prompt.
 

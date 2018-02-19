@@ -159,5 +159,45 @@ module Cryptoprocessing
       output = output.join("\n")
       puts output
     end
+
+    desc "callbacks ACCOUNT_ID ADDRESS", "List callbacks from ACCOUNT_ID with address ADDRESS"
+
+    def callbacks(account_id)
+      output = []
+      response = @client.callbacks(account_id)
+      output << response['message']
+      output = output.join("\n")
+      puts output
+    end
+
+    desc "create_callback ACCOUNT_ID ADDRESS", "Create callback for ACCOUNT_ID with address ADDRESS"
+
+    def create_callback(account_id, address)
+      output = []
+      response = @client.create_callback(account_id, address)
+      output << response['message']
+      output = output.join("\n")
+      puts output
+    end
+
+    desc "trackers ACCOUNT_ID ADDRESS", "List transactions from ACCOUNT_ID with address ADDRESS"
+
+    def trackers(account_id)
+      output = []
+      response = @client.trackers(account_id)
+      output << response['message']
+      output = output.join("\n")
+      puts output
+    end
+
+    desc "create_tracker ACCOUNT_ID ADDRESS", "List transactions from ACCOUNT_ID with address ADDRESS"
+
+    def create_tracker(account_id, address)
+      output = []
+      response = @client.create_tracker(account_id, address)
+      output << response['message']
+      output = output.join("\n")
+      puts output
+    end
   end
 end
