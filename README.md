@@ -4,6 +4,8 @@ Ruby Gem to access and interact with [Cryptoprocessing API](https://api.cryptopr
 
 To experiment with that code, run `bin/console` for an interactive prompt.
 
+[![Build Status](https://travis-ci.org/oomag/cryptoprocessing.rb.svg?branch=master)](https://travis-ci.org/oomag/cryptoprocessing.rb)
+
 ## Installation
 
 Add this line to your application's Gemfile:

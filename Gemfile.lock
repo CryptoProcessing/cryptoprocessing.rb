@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cryptoprocessing (0.5.0)
+    cryptoprocessing (0.6.0)
       logging (~> 2.0)
       thor (~> 0.19)
 
