@@ -1,4 +1,4 @@
-RSpec.describe Cryptoprocessing do
+describe Cryptoprocessing do
   before do
     Cryptoprocessing.reset!
   end
@@ -13,7 +13,7 @@ RSpec.describe Cryptoprocessing do
     end
   end
 
-  RSpec.describe '.client' do
+  describe '.client' do
     it 'creates an Cryptoprocessing::Client' do
       expect(Cryptoprocessing.client).to be_kind_of Cryptoprocessing::Client
     end
@@ -30,7 +30,7 @@ RSpec.describe Cryptoprocessing do
     end
   end
 
-  RSpec.describe '.configure' do
+  describe '.configure' do
     Cryptoprocessing::Configurable.keys.each do |key|
       it "sets the #{key.to_s.gsub('_', ' ')}" do
         Cryptoprocessing.configure do |config|
