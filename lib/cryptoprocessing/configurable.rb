@@ -40,6 +40,14 @@ module Cryptoprocessing
     end
     alias setup reset!
 
+    # Compares client options to a Hash of requested options
+    #
+    # @param opts [Hash] Options to compare with current client options
+    # @return [Boolean]
+    def same_options?(opts)
+      opts.hash == options.hash
+    end
+
     def blockchain_type
       @blockchain_type
     end
