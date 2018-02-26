@@ -74,7 +74,7 @@ module Cryptoprocessing
         out = nil
         currency = if options[:currency] then options[:currency] else blockchain_type end
         options[:type] = TRANSACTION_SEND_TYPE
-        options[:fee] = TRANSACTION_FEE_FASTEST
+        options[:fee] = options[:fee] || TRANSACTION_FEE_FASTEST
         options[:from_] = options[:from]
         options[:to_] = options[:to]
         options.delete(:from)
