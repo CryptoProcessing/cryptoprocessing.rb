@@ -10,11 +10,26 @@ engines:
     enabled: true
   rubocop:
     enabled: true
+plugins:
+  bundler-audit:
+    enabled: true
+  rubocop:
+    enabled: true
+  fixme:
+    enabled: true
+    config:
+      strings:
+      - FIXME
+      - BUG
 ratings:
   paths:
   - "**.rb"
 exclude_paths:
-- ext/
-- ports/
-- test/
-- tmp/
+- "ext/"
+- "ports/"
+- "test/"
+- "tmp/"
+exclude_patterns:
+- "features/"
+- "script/"
+- "**/vendor/"
