@@ -4,6 +4,7 @@ Ruby Gem to access and interact with [Cryptoprocessing API](https://api.cryptopr
 
 To experiment with that code, run `bin/console` for an interactive prompt.
 
+[![Gem Version](https://badge.fury.io/rb/cryptoprocessing.svg)](https://badge.fury.io/rb/cryptoprocessing)
 [![Build Status](https://travis-ci.org/oomag/cryptoprocessing.rb.svg?branch=master)](https://travis-ci.org/oomag/cryptoprocessing.rb)
 [![Coverage Status](https://coveralls.io/repos/github/oomag/cryptoprocessing.rb/badge.svg?branch=master)](https://coveralls.io/github/oomag/cryptoprocessing.rb?branch=master)
 
@@ -45,16 +46,13 @@ end
 
 client = Cryptoprocessing::Client.new(access_token: '<TOKEN>')
 client.account '<ACCOUNT_ID>'
-
 ```
 
 ### Paging
 
-
 ## Authorization
 
 ### Authorization using API keys
-
 
 ## Logging
 
@@ -70,8 +68,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/oomag/
 
 ## TODO
 
-
-
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
@@ -82,5 +78,4 @@ Everyone interacting in the Cryptoprocessing project’s codebases, issue tracke
 
 # Credits
 
-Arthur Chafonov <actuosus@gmail.com>
-
+Arthur Chafonov <mailto:actuosus@gmail.com>
