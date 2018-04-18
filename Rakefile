@@ -1,3 +1,5 @@
+require 'rake'
+
 require 'bundler/gem_tasks'
 Bundler::GemHelper.install_tasks
 
@@ -11,11 +13,8 @@ namespace :doc do
   begin
     require 'yard'
     YARD::Rake::YardocTask.new do |task|
-      task.files   = ['README.md', 'LICENSE.txt', 'lib/**/*.rb']
-      task.options = [
-          '--output-dir', 'doc/yard',
-          '--markup', 'markdown',
-      ]
+      task.files   = %w(README.md LICENSE.txt lib/**/*.rb)
+      task.options = %w(--output-dir doc/yard --markup markdown)
     end
   rescue LoadError
   end
