@@ -25,11 +25,13 @@ Or install it manually as:
 
 ## Usage
 
+### Basic usage
+
 ```ruby
 require 'cryptoprocessing'
 
 # Authenticate using email and password
-client = Cryptoprocessing::Client.new(:email => '<EMAIL>', :password => '<PASSWORD>')
+client = Cryptoprocessing::Client.new(email: '<EMAIL>', password: '<PASSWORD>')
 
 # or
 
@@ -41,10 +43,20 @@ end
 
 # or
 
-client = Cryptoprocessing::Client.new(:access_token => '<TOKEN>')
-client.account('<ACCOUNT_ID>')
+client = Cryptoprocessing::Client.new(access_token: '<TOKEN>')
+client.account '<ACCOUNT_ID>'
 
 ```
+
+### Paging
+
+
+## Authorization
+
+### Authorization using API keys
+
+
+## Logging
 
 ## Development
 
@@ -56,6 +68,10 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/oomag/cryptoprocessing-api-client. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
+## TODO
+
+
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
@@ -63,3 +79,8 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Code of Conduct
 
 Everyone interacting in the Cryptoprocessing project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/oomag/cryptoprocessing-api-client/blob/master/CODE_OF_CONDUCT.md).
+
+# Credits
+
+Arthur Chafonov <actuosus@gmail.com>
+
