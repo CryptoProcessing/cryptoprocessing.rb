@@ -1,25 +1,65 @@
+# This is the configuration used to check the cryptoprocessing.rb source code.
+
+require:
+  - rubocop-rspec
+
 AllCops:
   Exclude:
-    - "spec/**/*"
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - 'tmp/**/*'
+  TargetRubyVersion: 2.4
+
+
+Naming/PredicateName:
+  # Method define macros for dynamically generated method.
+  MethodDefinitionMacros:
+    - define_method
+    - define_singleton_method
+    - def_node_matcher
+    - def_node_search
+
+# Metrics
 
 Metrics/AbcSize:
   Max: 25
+
 Metrics/BlockLength:
   Exclude:
-    - "cryptoprocessing-api-client.gemspec"
+    - 'cryptoprocessing-api-client.gemspec'
+
 Metrics/CyclomaticComplexity:
   Max: 8
+
 Metrics/MethodLength:
   Max: 20
+
 Metrics/ClassLength:
   Enabled: false
+
+
+# Style
+
 Style/IndentHeredoc:
   Enabled: false
+
 Style/FormatString:
   Enabled: false
+
 Style/GuardClause:
   Enabled: false
+
 Style/PercentLiteralDelimiters:
   Enabled: false
+
 Style/SymbolArray:
   Enabled: false
+
+
+# RSpec
+
+RSpec/PredicateMatcher:
+  EnforcedStyle: explicit
+
+RSpec/NestedGroups:
+  Max: 7
