@@ -1,0 +1,2 @@
+Cryptoprocessing API Client for Ruby
+Copyright 2018 OOM.ag. All Rights Reserved.
