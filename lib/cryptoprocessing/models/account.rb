@@ -2,26 +2,38 @@ require 'cryptoprocessing/models/api_object'
 
 module Cryptoprocessing
   class Account < APIObject
-    def addresses(params = {})
-      agent.addresses(self['id'], params) do |data, resp|
+    # Create address
+    def create_address(options = {})
+      agent.create_address(self['id'], options) do |resp|
         yield(data, resp) if block_given?
       end
     end
 
-    def create_address(params = {})
-      agent.create_address(self['id'], params) do |data, resp|
+    # List of transactions
+    def transactions(options = {})
+      agent.transactions(self['id'], options) do |data, resp|
         yield(data, resp) if block_given?
       end
     end
 
-    def transactions
-      agent.transactions_by_address(self['id'], params) do |data, resp|
+    # List of transactions by address
+    def transactions_by_address(address, options = {})
+      agent.transactions_by_address(self['id'], address, options) do |data, resp|
         yield(data, resp) if block_given?
       end
     end
 
-    def transaction
+    # Create transaction
+    def create_transaction(options = {})
+      agent.create_transaction(self['id'], options) do |data, resp|
+        yield(data, resp) if block_given?
+      end
+    end
 
+    def create_callback(address, options = {})
+      agent.create_callback(self['id'], address, options) do |data, resp|
+        yield(data, resp) if block_given?
+      end
     end
   end
 end
