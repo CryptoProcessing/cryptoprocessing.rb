@@ -21,7 +21,7 @@ module Cryptoprocessing
       # @see https://api.cryptoprocessing.io/#9a0f12e1-1cae-4203-a89c-f033f5b66491
       def transaction(account_id, txid, options = {})
         out = nil
-        currency = if options[:currency] then options[:currency] else blockchain_type end
+        currency = options.fetch(:currency, blockchain_type)
         get("/v1/#{currency}/accounts/#{account_id}/transactions/#{txid}", options) do |resp|
           out = Cryptoprocessing::Transaction.new(self, resp.data)
           yield(out, resp) if block_given?
