@@ -131,6 +131,52 @@ RSpec.describe Cryptoprocessing::Client do
     expect {client.address(account_id, address)}.to_not raise_error
   end
 
+  it 'should be able to get transactions' do
+    stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/transactions/7bcd0cd7467322dffdbd27f853e79bf3b43aa4d033b47376d3415b0c79888da0")
+      .with(headers: {:Authorization => "Bearer #{access_token}"})
+      .to_return(:status => 200, body: {
+        "status": "success",
+        "transaction": {
+          "block": 512999,
+          "date": "Wed, 14 Nov 2018 20:48:31 GMT",
+          "description": "Outgoing transaction",
+          "hash": "808d255e9179db05d45c782525a780d3a9e54f56fdf98c0eed3bb6ab27352da0",
+          "idem": nil,
+          "inputs": [
+            {
+              "address": "1DVaLcCiiBXbrcAopvJkJtRUD8F418s9sf"
+            }
+          ],
+          "lock_time": 0,
+          "outputs": [
+            {
+              "address": "3H6HQ77YQdD1Lmy8V7kz6MrwuTTQzFHw9r",
+              "amount": 580000,
+              "position": 0,
+              "script": "a914a8f05f373bc0439f52d6393ba9f98898c291cbfd87"
+            },
+            {
+              "address": "bc1qtxqd0cxmluh82ysav2mpjggyqg98pxzk6d5cxr",
+              "amount": 35297,
+              "position": 1,
+              "script": "00145980d7e0dbff2e75121d62b6192104020a709856"
+            }
+          ],
+          "statuses": [
+            {
+              "date": "Wed, 14 Nov 2018 20:48:31 GMT",
+              "status": "in mempool"
+            },
+            {
+              "date": "Wed, 14 Nov 2018 20:48:31 GMT",
+              "status": "in block"
+            }
+          ]
+        }
+      }.to_json)
+    expect {client.transaction(account_id, '7bcd0cd7467322dffdbd27f853e79bf3b43aa4d033b47376d3415b0c79888da0')}.to_not raise_error
+  end
+
   it 'should be able to get list of transactions' do
     stub_request(:get, "#{api_endpoint}#{api_namespace}/v1/#{blockchain_type}/accounts/#{account_id}/transactions")
         .with(headers: {:Authorization => "Bearer #{access_token}"})
