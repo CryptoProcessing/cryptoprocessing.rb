@@ -9,4 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-* Collateral and integration services reorganization
+- Collateral and integration services reorganization
+
+## [0.6.2] - 2018-12-03
+
+### Added
+
+- Endpoint for getting a transaction info by transaction id
