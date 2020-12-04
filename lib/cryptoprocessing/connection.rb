@@ -16,7 +16,7 @@ module Cryptoprocessing
       @agent = Net::HTTP.new(base_uri.host, base_uri.port)
       @agent.use_ssl = true if base_uri.scheme == 'https'
       # @agent.cert_store = self.class.whitelisted_certificates
-      @agent.ssl_version = :TLSv1
+      # @agent.ssl_version = :TLSv1
       @agent
     end
 
